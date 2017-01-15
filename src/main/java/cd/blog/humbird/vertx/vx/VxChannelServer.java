@@ -53,8 +53,6 @@ public class VxChannelServer extends VxAbstractVerticle {
 
     @Override
     public void start(VxConfig config) {
-        monitorRemoteConnectConsumer = new MonitorRemoteConnectConsumer(vertx);
-        channelChooseAddrConsumer = new ChannelChooseAddrConsumer<>(vertx);
 //        consumerQueryList();
         installChooseChannelConsumer();
         // 此步骤用来 全局解析 Object, 对应解析为 CODE_NAME 里面的别名
@@ -251,6 +249,7 @@ public class VxChannelServer extends VxAbstractVerticle {
      * 选择一个再用的信道
      */
     private void installChooseChannelConsumer() {
+        channelChooseAddrConsumer = new ChannelChooseAddrConsumer<>(vertx);
         channelChooseAddrConsumer.consume(msg -> {
             String domainName = (String) msg.body();
             LocalMap<String, String> channelMap = VxUtils.getChannelIdsMap(vertx);
@@ -301,6 +300,7 @@ public class VxChannelServer extends VxAbstractVerticle {
      * 将获取的每一个 channel 远程信息以 REMOTE_CONNECT_REQ 方式发送出去
      */
     public void remoteQueryList() {
+        monitorRemoteConnectConsumer = new MonitorRemoteConnectConsumer(vertx);
         monitorRemoteConnectConsumer.consume(buffer -> {
             ProxyQueryParams params = (ProxyQueryParams) buffer.body();
             byte[] bytes = VxUtils.o2b(params);

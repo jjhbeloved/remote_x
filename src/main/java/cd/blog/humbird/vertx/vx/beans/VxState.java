@@ -71,7 +71,6 @@ public class VxState implements Serializable {
         this.channelId = channelId;
         sender = new ChannelDataSender(vertx, channelId);
         this.vertx = vertx;
-        msgConsumer = new ConnectReceiveAddrConsumer(vertx, this.connectId);
         VxUtils.getActiveConnectMap(vertx).put(connectId, channelId);
     }
 
@@ -368,6 +367,7 @@ public class VxState implements Serializable {
     }
 
     public void intallChannelDataConsumer(boolean isServer) {
+        msgConsumer = new ConnectReceiveAddrConsumer(vertx, this.connectId);
         msgConsumer.consume(msg -> {
             Buffer buf = msg.body();
             long dataRecvId = buf.getLong(0);
@@ -383,7 +383,7 @@ public class VxState implements Serializable {
             }
             this.setLastDataDate(new Date());
             // 回写
-            LOGGER.debug("receive data: {}, to {}:{}", leftBuf, sock.remoteAddress().host(), sock.remoteAddress().port());
+//            LOGGER.debug("receive data: {}, to {}:{}", leftBuf, sock.remoteAddress().host(), sock.remoteAddress().port());
             sock.write(leftBuf);
             if (sock.writeQueueFull()) {
                 LOGGER.warn("Proxy sock writeQueue full, try to pause the channel data consumer, connectId: {}", connectId);

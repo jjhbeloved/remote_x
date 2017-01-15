@@ -34,7 +34,7 @@ public class ChannelCommandFactory {
             case CHANNEL_INFO:
             case CHANNEL_INFO_RESP:
                 return new ChannelCommandChannelInfo(commandId, commandLength);
-//            case NEW_DIRECT_CONNECT:
+            case NEW_DIRECT_CONNECT:
             case PROXY_CONNECTED:
                 return new ChannelCommandDirectConnect(commandId, commandLength);
             default:

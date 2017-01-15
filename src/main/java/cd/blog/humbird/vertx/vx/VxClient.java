@@ -70,6 +70,7 @@ public class VxClient extends VxAbstractVerticle {
         //从sock读取数据后发送个数据到channel
         sock.handler(buf -> {
             vxState.setLastDataDate(new Date());
+            System.out.println(buf);
             long curSendId = VxChannelServer.channelSendId.addAndGet(1L);
             if (!vxState.isTargetIpParsed()) {
                 VxUtils.parseTargetIpPort(buf, vxState);
@@ -136,6 +137,7 @@ public class VxClient extends VxAbstractVerticle {
         newChannelData.appendString(vxState.getConnectId());
         newChannelData.appendLong(curSendId);
         newChannelData.appendBuffer(buf);
+        System.out.println("sendNewConnectCommand: " + buf);
         vxState.sendBufferDataToChannel(newChannelData);
         vxState.installPinger(vertx, config);
     }

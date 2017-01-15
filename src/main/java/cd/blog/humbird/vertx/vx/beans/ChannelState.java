@@ -84,7 +84,6 @@ public class ChannelState {
 
     public boolean init() {
         if (!inited) {
-            this.channelDataConsumer = new ChannelDataConsumer(this.vertx, channelId);
             // 接受关闭命令
             this.closeChannelConsumer = new CloseChannelConsumer(vertx, channelId, new Handler<Message>() {
                 @Override
@@ -171,10 +170,12 @@ public class ChannelState {
      * 将命令内容 回写给调用者
      */
     public void intallChannelDataConsumer() {
-        channelDataConsumer.consume(buffer -> {
+        this.channelDataConsumer = new ChannelDataConsumer(this.vertx, channelId);
+        this.channelDataConsumer.consume(buffer -> {
             Buffer msgBuf = (Buffer) (buffer.body());
             this.setSendCount(this.getSendCount() + msgBuf.length());
 //            LOGGER.info(msgBuf.getInt(0) + ":" + msgBuf.getInt(4) + ":" + msgBuf.getString(8, msgBuf.length()));
+            LOGGER.debug("----> data {} to {}:{} ", msgBuf, vxSock.remoteAddress().host(), vxSock.remoteAddress().port());
             vxSock.write(msgBuf);
             // 此步骤解决 读取速度 快过写入速度 造成Full问题
             if (vxSock.writeQueueFull()) {
