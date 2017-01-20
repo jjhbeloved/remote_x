@@ -1,7 +1,6 @@
 package cd.blog.humbird.vertx.demo.bus;
 
 import cd.blog.humbird.vertx.demo.util.Runner;
-import cd.blog.humbird.vertx.vx.beans.VxQueryParams;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
 
@@ -23,14 +22,14 @@ public class Sender extends AbstractVerticle {
     public void start() throws Exception {
         EventBus eventBus = vertx.eventBus();
         System.out.println("----");
-        VxQueryParams vxQueryParams = new VxQueryParams();
-        vxQueryParams.setLimit(1000);
-        eventBus.send("xxmmm.19001", vxQueryParams, handler -> {
-            if (handler.succeeded()) {
-                System.out.println("reply: " + handler.result().body());
-            } else {
-
-            }
-        });
+//        VxQueryParams vxQueryParams = new VxQueryParams();
+//        vxQueryParams.setLimit(1000);
+//        eventBus.send("xxmmm.19001", vxQueryParams, handler -> {
+//            if (handler.succeeded()) {
+//                System.out.println("reply: " + handler.result().body());
+//            } else {
+//
+//            }
+//        });
     }
 }

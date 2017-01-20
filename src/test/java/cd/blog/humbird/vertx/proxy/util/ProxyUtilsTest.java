@@ -1,7 +1,5 @@
 package cd.blog.humbird.vertx.proxy.util;
 
-import cd.blog.humbird.vertx.vx.beans.ChannelClientInfo;
-import cd.blog.humbird.vertx.vx.utils.VxUtils;
 import org.apache.commons.codec.EncoderException;
 import org.apache.commons.codec.binary.Base64;
 import org.junit.Test;
@@ -12,11 +10,11 @@ import org.junit.Test;
 public class ProxyUtilsTest {
     @Test
     public void o2b() throws Exception {
-        ChannelClientInfo info = new ChannelClientInfo();
-        info.setComputerName("Hi, man");
-        byte[] bytes = VxUtils.o2b(info);
-        ChannelClientInfo info1 = VxUtils.b2o(bytes);
-        System.out.println(info1.getComputerName());
+//        ChannelClientInfo info = new ChannelClientInfo();
+//        info.setComputerName("Hi, man");
+//        byte[] bytes = VxUtils.o2b(info);
+//        ChannelClientInfo info1 = VxUtils.b2o(bytes);
+//        System.out.println(info1.getComputerName());
     }
 
     @Test

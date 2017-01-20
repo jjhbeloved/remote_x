@@ -1,14 +1,12 @@
 package cd.blog.humbird.vertx.proxy.beans;
 
-import cd.blog.humbird.vertx.vx.beans.VxQueryParams;
-import cd.blog.humbird.vertx.vx.utils.SerializableMessageCode;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
-import io.vertx.core.eventbus.*;
+import io.vertx.core.eventbus.EventBus;
+import io.vertx.core.eventbus.Message;
+import io.vertx.core.eventbus.MessageConsumer;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.Serializable;
 
 /**
  * Created by david on 17/1/3.
@@ -24,17 +22,17 @@ public class BusTest {
 
     public void busSendTest() {
         EventBus eventBus = vertx.eventBus();
-        eventBus.registerDefaultCodec(Serializable.class, new SerializableMessageCode());
-        VxQueryParams vxQueryParams = new VxQueryParams();
-        vxQueryParams.setLimit(1000);
-        MessageProducer<Object> producer = eventBus.sender("xxmmm.19001", new DeliveryOptions().setCodecName("serializable"));
-        producer.send(vxQueryParams, handler -> {
-            if (handler.succeeded()) {
-                System.out.println("reply: " + handler.result().body());
-            } else {
-
-            }
-        });
+//        eventBus.registerDefaultCodec(Serializable.class, new SerializableMessageCode());
+//        VxQueryParams vxQueryParams = new VxQueryParams();
+//        vxQueryParams.setLimit(1000);
+//        MessageProducer<Object> producer = eventBus.sender("xxmmm.19001", new DeliveryOptions().setCodecName("serializable"));
+//        producer.send(vxQueryParams, handler -> {
+//            if (handler.succeeded()) {
+//                System.out.println("reply: " + handler.result().body());
+//            } else {
+//
+//            }
+//        });
     }
 
     public void busConsumerTest() throws InterruptedException {
@@ -51,16 +49,16 @@ public class BusTest {
         }
 
         public void handler() {
-            this.abConsumer.consume(message->{
-                System.out.println("from: " + message.address() + ", message: " + ((VxQueryParams) message.body()).getLimit());
-                message.reply("Go U.");
-            }).completionHandler(handler -> {
-                if (handler.succeeded()) {
-                    System.out.println("succeeded");
-                } else {
-                    System.out.println("failed");
-                }
-            });
+//            this.abConsumer.consume(message->{
+//                System.out.println("from: " + message.address() + ", message: " + ((VxQueryParams) message.body()).getLimit());
+//                message.reply("Go U.");
+//            }).completionHandler(handler -> {
+//                if (handler.succeeded()) {
+//                    System.out.println("succeeded");
+//                } else {
+//                    System.out.println("failed");
+//                }
+//            });
         }
     }
 

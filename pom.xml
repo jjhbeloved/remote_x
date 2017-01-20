@@ -7,7 +7,7 @@
     <groupId>cd.blog.humbird</groupId>
     <artifactId>remote_x</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>remote_proxy</name>
+    <name>remote_x</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -16,7 +16,7 @@
         <log4j.version>1.2.17</log4j.version>
         <slf4j.version>1.7.21</slf4j.version>
         <codec.version>1.10</codec.version>
-        <main.verticle>cd.blog.humbird.vertx.vx.VxChannelClient</main.verticle>
+        <main.verticle>cd.blog.humbird.vertx.hm.Ping</main.verticle>
     </properties>
 
     <dependencies>
@@ -94,7 +94,8 @@
                         </goals>
                         <configuration>
                             <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <manifestEntries>
                                         <Main-Class>io.vertx.core.Launcher</Main-Class>
                                         <Main-Verticle>${main.verticle}</Main-Verticle>

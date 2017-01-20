@@ -1,0 +1,18 @@
+{
+  "pingHost": "0.0.0.0",
+  "pingPort": 13128,
+  "proxyHost": "0.0.0.0",
+  "proxyPort": 13127,
+  "clientHost": "0.0.0.0",
+  "clientPort": 13129,
+  "pingPeriodic": 10000,
+  // 这个是 多久进行 client -> server ping-pong 连接
+  "pingTimeout": 10000,
+  // 多久认为 client -> server ping-pong 失败, 此值应该比 pingDelay 大
+  "closeResumeTimeOut": 120000,
+  "channelClientName": "yangxuan",
+  "connectPingPeriodic": 600000,
+  // 多久认为 connect -> channel 的 ping-pong 失败
+  "domainName": "yangxuan",
+  "needHttpProxy": true
+}
